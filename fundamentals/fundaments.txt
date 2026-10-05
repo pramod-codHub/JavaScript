@@ -1,0 +1,420 @@
+# JavaScript Variables, Scope & Hoisting
+
+This file covers the fundamentals of **JavaScript variables**, including `var`, `let`, `const`, scope, and hoisting. These are important concepts frequently asked in JavaScript interviews.
+
+## 📌 Topics Covered
+
+- Variables
+- `var`, `let`, and `const`
+- Variable declaration and initialization
+- Reassignment
+- Global Scope
+- Function Scope
+- Block Scope
+- Hoisting
+- Temporal Dead Zone (TDZ)
+- Variable redeclaration
+- Variable naming conventions
+
+---
+
+## 1. Variables
+
+Variables are used to store data that can be accessed and manipulated in a JavaScript program.
+
+```javascript
+let name = "Pramod";
+const age = 25;
+var city = "Mumbai";
+
+console.log(name);
+console.log(age);
+console.log(city);
+```
+
+---
+
+## 2. `let`
+
+`let` is used when the value of a variable may change.
+
+```javascript
+let count = 10;
+
+count = 20;
+
+console.log(count); // 20
+```
+
+A `let` variable cannot be redeclared in the same scope.
+
+```javascript
+let name = "John";
+
+// let name = "Alex"; // SyntaxError
+```
+
+---
+
+## 3. `const`
+
+`const` is used when a variable should not be reassigned.
+
+```javascript
+const country = "India";
+
+console.log(country);
+```
+
+Reassignment is not allowed:
+
+```javascript
+const country = "India";
+
+country = "USA"; // TypeError
+```
+
+---
+
+## 4. `var`
+
+`var` is the older way of declaring variables.
+
+```javascript
+var message = "Hello";
+
+message = "Hello JavaScript";
+
+console.log(message);
+```
+
+In modern JavaScript, prefer **`const` and `let`** over `var`.
+
+---
+
+# 🔹 Scope
+
+**Scope determines where a variable can be accessed in a JavaScript program.**
+
+JavaScript mainly has:
+
+1. Global Scope
+2. Function Scope
+3. Block Scope
+
+---
+
+## 5. Global Scope
+
+A variable declared outside a function or block has global scope.
+
+```javascript
+const name = "Pramod";
+
+function greet() {
+    console.log(name);
+}
+
+greet();
+```
+
+Output:
+
+```text
+Pramod
+```
+
+The `name` variable can be accessed inside the function because it is in the outer/global scope.
+
+---
+
+## 6. Function Scope
+
+Variables declared using `var` inside a function are function-scoped.
+
+```javascript
+function test() {
+    var message = "Hello";
+
+    console.log(message);
+}
+
+test();
+```
+
+Output:
+
+```text
+Hello
+```
+
+But we cannot access `message` outside the function:
+
+```javascript
+function test() {
+    var message = "Hello";
+}
+
+console.log(message); // ReferenceError
+```
+
+---
+
+## 7. Block Scope
+
+`let` and `const` are **block-scoped**.
+
+A block is generally represented by `{ }`.
+
+```javascript
+{
+    let age = 25;
+    const name = "Pramod";
+
+    console.log(age);
+    console.log(name);
+}
+```
+
+The variables cannot be accessed outside the block:
+
+```javascript
+{
+    let age = 25;
+}
+
+console.log(age); // ReferenceError
+```
+
+---
+
+## 8. `var` vs `let` Block Scope
+
+This is an important interview example.
+
+### Using `var`
+
+```javascript
+if (true) {
+    var name = "Pramod";
+}
+
+console.log(name);
+```
+
+Output:
+
+```text
+Pramod
+```
+
+`var` is **not block-scoped**.
+
+### Using `let`
+
+```javascript
+if (true) {
+    let name = "Pramod";
+}
+
+console.log(name); // ReferenceError
+```
+
+`let` is **block-scoped**.
+
+---
+
+# 🔥 Hoisting
+
+**Hoisting is JavaScript's behavior of processing declarations before executing the code.**
+
+However, `var`, `let`, and `const` behave differently during hoisting.
+
+---
+
+## 9. `var` Hoisting
+
+A `var` declaration is hoisted and initialized with `undefined`.
+
+```javascript
+console.log(name);
+
+var name = "Pramod";
+```
+
+Output:
+
+```text
+undefined
+```
+
+Conceptually, JavaScript behaves approximately like:
+
+```javascript
+var name;
+
+console.log(name);
+
+name = "Pramod";
+```
+
+---
+
+## 10. `let` Hoisting
+
+`let` declarations are also hoisted, but they are **not initialized**.
+
+They remain in the **Temporal Dead Zone (TDZ)** until the declaration is reached.
+
+```javascript
+console.log(name);
+
+let name = "Pramod";
+```
+
+Output:
+
+```text
+ReferenceError
+```
+
+---
+
+## 11. `const` Hoisting
+
+`const` behaves similarly to `let`.
+
+```javascript
+console.log(age);
+
+const age = 25;
+```
+
+Output:
+
+```text
+ReferenceError
+```
+
+The variable exists in the scope but cannot be accessed before its declaration.
+
+---
+
+# ⚡ Temporal Dead Zone (TDZ)
+
+The **Temporal Dead Zone** is the period between entering a scope and reaching the declaration of a `let` or `const` variable.
+
+```javascript
+console.log(name); // ReferenceError
+
+let name = "Pramod";
+```
+
+The TDZ exists from the beginning of the scope until:
+
+```javascript
+let name = "Pramod";
+```
+
+is executed.
+
+---
+
+# 🔥 Interview Example
+
+Consider this code:
+
+```javascript
+console.log(a);
+console.log(b);
+console.log(c);
+
+var a = 10;
+let b = 20;
+const c = 30;
+```
+
+What happens?
+
+The first statement:
+
+```javascript
+console.log(a);
+```
+
+prints:
+
+```text
+undefined
+```
+
+But:
+
+```javascript
+console.log(b);
+```
+
+throws:
+
+```text
+ReferenceError
+```
+
+Because `b` is in the Temporal Dead Zone.
+
+Therefore, execution stops and `c` is never reached.
+
+---
+
+# 🎯 Common Interview Questions
+
+1. What is a variable in JavaScript?
+2. What is the difference between `var`, `let`, and `const`?
+3. What is scope?
+4. What is global scope?
+5. What is function scope?
+6. What is block scope?
+7. Is `var` block-scoped?
+8. Are `let` and `const` block-scoped?
+9. What is hoisting?
+10. How does hoisting work with `var`?
+11. How does hoisting work with `let` and `const`?
+12. What is the Temporal Dead Zone?
+13. Can we redeclare a `let` variable?
+14. Can we redeclare a `const` variable?
+15. Can we reassign a `const` variable?
+16. What happens when a variable is accessed before declaration?
+
+---
+
+## ✅ Best Practice
+
+Prefer `const` by default:
+
+```javascript
+const name = "Pramod";
+```
+
+Use `let` when the value needs to change:
+
+```javascript
+let count = 0;
+
+count++;
+```
+
+Avoid `var` in modern JavaScript unless you specifically need its behavior.
+
+---
+
+## Quick Summary
+
+| Keyword | Scope | Redeclaration | Reassignment | Hoisting |
+|---|---|---|---|---|
+| `var` | Function | ✅ Yes | ✅ Yes | `undefined` |
+| `let` | Block | ❌ No | ✅ Yes | TDZ |
+| `const` | Block | ❌ No | ❌ No | TDZ |
+
+---
+
+**Next Topics:** Data Types → Functions → Closures → `this` → Promises → Event Loop 🚀

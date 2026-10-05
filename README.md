@@ -67,26 +67,16 @@ The main goal of this repository is to provide a **structured collection of Java
 javascript/
 │
 ├── fundamentals/
-│   ├── variables.js
-│   ├── data-types.js
-│   ├── scope.js
-│   └── hoisting.js
-│
-├── arrays/
-│   ├── reverse-array.js
-│   ├── remove-duplicates.js
-│   ├── two-sum.js
-│   └── frequency-counter.js
-│
-├── strings/
-│   ├── reverse-string.js
-│   ├── anagram.js
-│   └── palindrome.js
-│
-├── functions/
-│   ├── callbacks.js
-│   ├── closures.js
-│   └── higher-order-functions.js
+│   ├──fundaments.txt
+│   
+├── coding problems/
+│   ├── Fibonacci
+│   ├── FindMaxDifference
+│   ├── FrequncyCounter
+│   └── frequency-counter
+│   ├── reverse-string
+│   ├── anagram
+│   └── palindrome
 │
 └── README.md
 ```
